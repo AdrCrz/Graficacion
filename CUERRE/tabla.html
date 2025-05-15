@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tabla Numerada con Colores</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            height: 100%;
+        }
+        td {
+            border: 1px solid black;
+            text-align: center;
+            width: 40px;
+            height: 40px;
+        }
+
+        /* Definir colores para cada grupo de celdas */
+        .D1 { background-color: #FFDDC1; }
+        .D2 { background-color: #FFABAB; }
+        .D3 { background-color: #FF8C94; }
+        .D4 { background-color: #FF4C97; }
+        .D5 { background-color: #FF0077; }
+        .D6 { background-color: #FF0033; }
+        .D7 { background-color: #FF0000; }
+        .D8 { background-color: #FF3300; }
+        .D9 { background-color: #FF6600; }
+        .D10 { background-color: #FF9900; }
+        .D11 { background-color: #FFCC00; }
+        .D12 { background-color: #FFFF00; }
+        .D13 { background-color: #CCFF00; }
+        .D14 { background-color: #99FF00; }
+        .D15 { background-color: #66FF00; }
+        .D16 { background-color: #33FF00; }
+        .D17 { background-color: #00FF00; }
+        .D18 { background-color: #00FF33; }
+        .D19 { background-color: #00FF66; }
+        .D20 { background-color: #00FF99; }
+        .D21 { background-color: #00FFCC; }
+        .D22 { background-color: #00FFFF; }
+        .D23 { background-color: #00CCFF; }
+        .D24 { background-color: #0099FF; }
+        .D25 { background-color: #0066FF; }
+        .D26 { background-color: #0033FF; }
+        .D27 { background-color: #0000FF; }
+        .D28 { background-color: #3700ff; }
+        .E1 { background-color: #6600FF; }
+        .E2 { background-color: #9900FF; }
+        .E3 { background-color: #CC00FF; }
+        .E4 { background-color: #FF00FF; }
+        .E5 { background-color: #FF00CC; }
+        .E6 { background-color: #FF0099; }
+        .E7 { background-color: #FF0066; }
+        .E8 { background-color: #FF0033; }
+        .E9 { background-color: #FF0000; }
+        .E10 { background-color: #FF3300; }
+        .E11 { background-color: #FF6600; }
+        .E12 { background-color: #FF9900; }
+        .E13 { background-color: #FFCC00; }
+        .E14 { background-color: #FFFF00; }
+        .E15 { background-color: #CCFF00; }
+        .E16 { background-color: #99FF00; }
+        .Vi { background-color: #66FF00; }
+    </style>
+</head>
+<body>
+
+    <table id="tabla"></table>
+
+    <script>
+        const filas = 25;
+        const columnas = 25;
+        let numero = 0;
+        const tabla = document.getElementById('tabla');
+
+        // Los 45 arreglos que me proporcionaste
+        const arreglos = {
+            D1: [624, 623, 599, 598, 574, 573, 549, 548],
+            D2: [524, 523, 499, 498, 474, 473, 449, 448],
+            D3: [424, 423, 399, 398, 374, 373, 349, 348],
+            D4: [324, 323, 299, 298, 274, 273, 249, 248],
+            D5: [247, 246, 272, 271, 297, 296, 322, 321],
+            D6: [347, 346, 372, 371, 397, 396, 422, 421],
+            D7: [447, 446, 472, 471, 497, 496, 522, 521],
+            D8: [547, 546, 572, 571, 597, 596, 622, 621],
+            D9: [620, 619, 595, 594, 570, 569, 545, 544],
+            D10: [395, 394, 370, 369, 345, 344, 320, 319],
+            D11: [295, 294, 270, 269, 245, 244, 243, 242],
+            D12: [268, 267, 293, 292, 318, 317, 343, 342],
+            D13: [368, 367, 393, 392, 543, 542, 568, 567],
+            D14: [593, 592, 618, 617, 616, 615, 591, 590],
+            D15: [566, 565, 541, 540, 515, 490, 465, 440],
+            D16: [415, 391, 390, 366, 365, 341, 340, 316],
+            D17: [315, 291, 290, 266, 265, 241, 240, 216],
+            D18: [215, 191, 190, 141, 140, 116, 115, 91],
+            D19: [90, 66, 65, 41, 40, 16, 15, 14],
+            D20: [13, 39, 38, 64, 63, 89, 88, 114],
+            D21: [113, 139, 138, 189, 188, 214, 213, 239],
+            D22: [238, 264, 263, 289, 288, 314, 313, 339],
+            D23: [338, 364, 363, 389, 388, 414, 413, 439],
+            D24: [438, 464, 463, 489, 488, 514, 513, 539],
+            D25: [538, 564, 563, 589, 588, 614, 613, 612],
+            D26: [611, 587, 586, 562, 561, 537, 536, 512],
+            D27: [511, 487, 486, 462, 461, 437, 436, 412],
+            D28: [411, 387, 386, 362, 361, 337, 336, 312],
+            E1: [311, 287, 286, 262, 261, 237, 236, 212],
+            E2: [211, 187, 186, 137, 136, 112, 111, 87],
+            E3: [86, 62, 61, 37, 36, 12, 11, 10],
+            E4: [9, 35, 34, 60, 59, 85, 84, 110],
+            E5: [109, 135, 134, 185, 184, 210, 209, 235],
+            E6: [234, 260, 259, 285, 284, 310, 309, 335],
+            E7: [334, 360, 359, 385, 384, 410, 409, 435],
+            E8: [434, 460, 459, 485, 484, 510, 509, 535],
+            E9: [534, 560, 559, 585, 584, 610, 609, 408],
+            E10: [407, 383, 382, 358, 357, 333, 332, 308],
+            E11: [307, 283, 282, 258, 257, 233, 232, 230],
+            E12: [229, 255, 254, 280, 279, 305, 304, 330],
+            E13: [329, 355, 354, 380, 379, 405, 404, 403],
+            E14: [402, 378, 377, 353, 352, 328, 327, 303],
+            E15: [302, 278, 277, 253, 252, 228, 227, 226],
+            E16: [225, 251, 250, 276, 275, 301, 300, 326],
+            Vi: [325, 351, 350, 376, 375, 401, 400]
+        };
+
+        let currentRow = 0;
+        // Crear la tabla
+        for (let i = 0; i < filas; i++) {
+            const fila = document.createElement('tr');
+            for (let j = 0; j < columnas; j++) {
+                const celda = document.createElement('td');
+                // Asignamos el número de la celda según su posición
+                celda.textContent = numero;
+
+                // Verificamos en qué arreglo se encuentra este número
+                for (const key in arreglos) {
+                    if (arreglos[key].includes(numero)) {
+                        celda.classList.add(key); // Asignamos la clase correspondiente
+                    }
+                }
+
+                fila.appendChild(celda);
+                numero++; // Incrementamos el número para la siguiente celda
+            }
+            tabla.appendChild(fila);
+        }
+    </script>
+</body>
+</html>

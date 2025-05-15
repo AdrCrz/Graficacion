@@ -1,0 +1,48 @@
+#footer{
+    background: linear-gradient(0deg,#1c3643,#273b47 25%,#1e5372);
+  }
+  
+  #footer a{
+    color: #FFFFFF;
+  }
+
+.chart {
+  position: relative;
+  overflow: hidden;
+}
+
+.chart::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom right, #f5f6fe, #c1d4fe);
+  z-index: 0;
+}
+
+.chart::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 200%;
+  height: 200%;
+  transform: translate(-25%, -25%);
+  background: conic-gradient(
+    from 0deg,
+    #6284ff 0%,
+    #7a6fff 10%,
+    #ff72b6 25%,
+    #f9e5e8 45%,
+    #97e1d4 70%,
+    #6284ff 100%
+  );
+  opacity: 0.3;
+  border-radius: 40% 60% 60% 40% / 50% 40% 60% 50%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.chart canvas {
+  position: relative;
+  z-index: 2;
+}
