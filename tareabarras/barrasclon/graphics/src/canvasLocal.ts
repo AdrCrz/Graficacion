@@ -1,4 +1,3 @@
-
 export class CanvasLocal {
   //atributos
   protected graphics: CanvasRenderingContext2D;
@@ -24,6 +23,7 @@ export class CanvasLocal {
 
   iX(x: number):number{return Math.round(this.centerX + x/this.pixelSize);}
   iY(y: number):number{return Math.round(this.centerY - y / this.pixelSize); }
+  
   drawLine(x1: number, y1: number, x2: number, y2:number) {
     this.graphics.beginPath();
     this.graphics.moveTo(x1, y1);
@@ -31,6 +31,7 @@ export class CanvasLocal {
     this.graphics.closePath();
     this.graphics.stroke();
   }
+
   drawRmboide(x1: number, y1: number, x2: number, y2: number,
   x3:number, y3:number, x4:number, y4:number, color:string) {
   
@@ -75,90 +76,125 @@ export class CanvasLocal {
     res = Math.ceil(max / pot) * pot;
     return res;
   }
+
   barra(x:number, y:number, alt:number):void{
-    this.drawLine(this.iX(x), this.iY(0), this.iX(x-0.5), this.iY(0.5));
-    this.drawLine(this.iX(x-0.5), this.iY(0.5), this.iX(x-0.5), this.iY(y+alt));
-    this.drawLine(this.iX(x-0.5), this.iY(y+alt), this.iX(x), this.iY(y+alt-0.5));
-    this.drawLine(this.iX(x), this.iY(y+alt-0.5), this.iX(x+0.5), this.iY(y+alt));
-    this.drawLine(this.iX(x+0.5), this.iY(y+alt), this.iX(x+0.5), this.iY(0.5));
-    this.drawLine(this.iX(x+0.5), this.iY(0.5), this.iX(x), this.iY(0));
-    this.drawLine(this.iX(x), this.iY(0), this.iX(x), this.iY(y+alt-0.5));
-    this.graphics.strokeStyle = 'gray';
-    this.drawLine(this.iX(x-0.5), this.iY(y+alt), this.iX(x-0.5), this.iY(this.rHeight-2));
-    this.drawLine(this.iX(x), this.iY(y+alt-0.5), this.iX(x), this.iY(this.rHeight-2.5));
-    this.drawLine(this.iX(x+0.5), this.iY(y+alt), this.iX(x+0.5), this.iY(this.rHeight-2));
-    this.drawLine(this.iX(x-0.5), this.iY(this.rHeight-2), this.iX(x), this.iY(this.rHeight-1.5));
-    this.drawLine(this.iX(x+0.5), this.iY(this.rHeight-2), this.iX(x), this.iY(this.rHeight-1.5));
-    this.drawLine(this.iX(x-0.5), this.iY(this.rHeight-2), this.iX(x), this.iY(this.rHeight-2.5));
-    this.drawLine(this.iX(x+0.5), this.iY(this.rHeight-2), this.iX(x), this.iY(this.rHeight-2.5));
+        
+    this.graphics.fillStyle   = 'rgba(61, 61, 63, 1)';
+    this.graphics.beginPath();
+    this.graphics.moveTo(this.iX(x - 0.5),this.iY(y + alt));
+    this.graphics.lineTo(this.iX(x - 0.5),this.iY(this.rHeight - 2));
+    this.graphics.lineTo(this.iX(x),this.iY(this.rHeight - 2.5));
+    this.graphics.lineTo(this.iX(x),this.iY(y + alt - 0.5));
+    this.graphics.closePath();
+    this.graphics.fill();
+    this.graphics.stroke();
+
+    this.graphics.fillStyle   = 'rgba(77, 78, 80, 1)';
+    this.graphics.beginPath();
+    this.graphics.moveTo(this.iX(x + 0.5),this.iY(y + alt));
+    this.graphics.lineTo(this.iX(x + 0.5),this.iY(this.rHeight - 2));
+    this.graphics.lineTo(this.iX(x),this.iY(this.rHeight - 2.5));
+    this.graphics.lineTo(this.iX(x),this.iY(y + alt - 0.5));
+    this.graphics.closePath();
+    this.graphics.fill();
+    this.graphics.stroke();
+
+    this.graphics.fillStyle   = 'rgba(90, 92, 96, 1)';
+    this.graphics.beginPath();
+    this.graphics.moveTo(this.iX(x - 0.5),this.iY(this.rHeight - 2));
+    this.graphics.lineTo(this.iX(x),this.iY(this.rHeight - 1.5));
+    this.graphics.lineTo(this.iX(x + 0.5),this.iY(this.rHeight - 2));
+    this.graphics.lineTo(this.iX(x),this.iY(this.rHeight - 2.5));
+    this.graphics.closePath();
+    this.graphics.fill();
+    this.graphics.stroke();
+
+    // Original lines (many of these seem redundant with the filled paths above, but kept for consistency)
+    this.drawLine(this.iX(x), this.iY(0), this.iX(x - 0.5), this.iY(0.5));
+    this.drawLine(this.iX(x - 0.5), this.iY(0.5), this.iX(x - 0.5), this.iY(y + alt));
+    this.drawLine(this.iX(x - 0.5), this.iY(y + alt), this.iX(x), this.iY(y + alt - 0.5));
+    this.drawLine(this.iX(x + 0.5), this.iY(y + alt), this.iX(x), this.iY(y + alt + 0.5));
+    this.drawLine(this.iX(x - 0.5), this.iY(y + alt), this.iX(x), this.iY(y + alt + 0.5));
+    this.drawLine(this.iX(x), this.iY(y + alt - 0.5), this.iX(x), this.iY(y + alt + 0.5));
+    this.drawLine(this.iX(x), this.iY(y + alt - 0.5), this.iX(x + 0.5), this.iY(y + alt));
+    this.drawLine(this.iX(x + 0.5), this.iY(y + alt), this.iX(x + 0.5), this.iY(0.5));
+    this.drawLine(this.iX(x + 0.5), this.iY(0.5), this.iX(x), this.iY(0));
+    this.drawLine(this.iX(x), this.iY(0), this.iX(x), this.iY(y + alt - 0.1));
+    
+
+    this.graphics.fillStyle = 'rgba(194, 64, 100, 1)';
+    this.graphics.beginPath();
+    this.graphics.moveTo( this.iX(x),       this.iY(0)           );
+    this.graphics.lineTo( this.iX(x - 0.5), this.iY(0.5)         );
+    this.graphics.lineTo( this.iX(x - 0.5), this.iY(y + alt)     );
+    this.graphics.lineTo( this.iX(x),       this.iY(y + alt - 0.5) );
+    this.graphics.closePath();
+    this.graphics.fill();
+    this.graphics.stroke();
+
+    this.graphics.fillStyle = 'rgba(228, 100, 125, 1)';
+    this.graphics.beginPath();
+    this.graphics.moveTo( this.iX(x),       this.iY(0)           );
+    this.graphics.lineTo( this.iX(x),       this.iY(y + alt - 0.5) );
+    this.graphics.lineTo( this.iX(x + 0.5), this.iY(y + alt)     );
+    this.graphics.lineTo( this.iX(x + 0.5), this.iY(0.5)         );
+    this.graphics.closePath();
+    this.graphics.fill();
+    this.graphics.stroke();
+
+    this.graphics.fillStyle = 'rgba(220, 102, 129, 1)';
+    this.graphics.beginPath();
+    this.graphics.moveTo( this.iX(x - 0.5), this.iY(y + alt)     );
+    this.graphics.lineTo( this.iX(x),       this.iY(y + alt - 0.5) );
+    this.graphics.lineTo( this.iX(x),       this.iY(y + alt + 0.5) );
+    this.graphics.closePath();
+    this.graphics.fill();
+    this.graphics.stroke();
+
+    this.graphics.fillStyle = 'rgba(230, 150, 170, 1)';
+    this.graphics.beginPath();
+    this.graphics.moveTo( this.iX(x + 0.5), this.iY(y + alt)     );
+    this.graphics.lineTo( this.iX(x),       this.iY(y + alt + 0.5) );
+    this.graphics.lineTo( this.iX(x),       this.iY(y + alt - 0.5) );
+    this.graphics.closePath();
+    this.graphics.fill();
+    this.graphics.stroke();
+    
+    const x1_rhomboid = x - 0.5;
+    const y1_rhomboid = 0.5;
+    const x2_rhomboid = x;
+    const y2_rhomboid = 0;
+    const dx = 0.9;
+    const dyIzq = 0.2;
+    const dyCen = 0.2;
+    const x3_rhomboid = x2_rhomboid - dx;
+    const y3_rhomboid = y2_rhomboid - dyCen;
+    const x4_rhomboid = x1_rhomboid - dx;
+    const y4_rhomboid = y1_rhomboid - dyIzq;
+    this.drawRmboide(
+        this.iX(x1_rhomboid), this.iY(y1_rhomboid), 
+        this.iX(x2_rhomboid), this.iY(y2_rhomboid), 
+        this.iX(x3_rhomboid), this.iY(y3_rhomboid), 
+        this.iX(x4_rhomboid), this.iY(y4_rhomboid), 
+        'rgba(194, 64, 100, 0.3)' 
+    );
     this.graphics.strokeStyle = 'black';
   }
 
+  paint(h: number[] = [10, 30, 80, 50]) { // Added default parameter for h
+    const maxEsc = 100; // This was hardcoded in canvasLocal.js, so keeping it
+    const colors = ['black']; // This was hardcoded in canvasLocal.js, so keeping it
 
-  paint() {
-    
-    //let h: number[] = [20, 100, 160, 420];
-    //let h: number[] = [1150, 1780, 860, 1260, 1500];
-    let h: number[] = [27, 10, 16,90,50,75];
-    let maxEsc: number;
-    let colors: string[]= ['magenta', 'red', 'green', 'yellow'];
-
-    maxEsc = this.maxH(h);
-    let i=0;
-    for(let x= 0; x < 8; x+=(8/(h.length*1)) ){
-      this.graphics.strokeStyle = colors[i%4];
-      if(i<h.length)
-        this.barra(x,0, h[i++]*(this.rHeight-2)/maxEsc);
-    }
-    i=0;
-    for (let x = 0; x < 8; x += (8/(h.length*1)) ){
-      this.graphics.strokeStyle = colors[i%4];
-      if(i<h.length)
-        this.graphics.strokeText(h[i++]+"", this.iX(x), this.iY(-0.5));
-    }
-    
-/*
-    this.barra(3,0, 10*(this.rHeight-2)/maxEsc);
-
-    this.barra(5,0, 16*(this.rHeight-2)/maxEsc);
-    this.barra(7,0, 2*(this.rHeight-2)/maxEsc);
-    /*this.graphics.strokeStyle = 'black';
-    this.drawLine(this.iX(0), this.iY(0), this.iX(8), this.iY(0));
-    this.drawLine(this.iX(0), this.iY(0), this.iX(0), this.iY(6));
-    //las 6 unidades se dividen entre 4 periodos de lineas cada una 
-    //representara una escala de 1/4 del total maximo
     let i = 0;
-    for (let y = 0.6; y <= 6; y += 1.35){
-      this.drawLine(this.iX(0.6), this.iY(y), this.iX(8), this.iY(y));
-      this.drawLine(this.iX(0), this.iY(y - 0.6), this.iX(0.6), this.iY(y));
-      this.graphics.strokeText((maxEsc*i/4)+"",this.iX(-0.5), this.iY(y-0.7));
-      i++;
+    for (let x = 0; x < 8; x += (10 / h.length)) { // Loop condition changed from 8/(h.length*1) to 10/h.length
+        this.graphics.strokeStyle = colors[i % colors.length];
+        let valor = h[i];
+        if (valor >= 0 && valor <= 100) { // Condition from canvasLocal.js
+            this.barra(x, 0, valor * (this.rHeight - 2) / maxEsc);
+        } else {
+            this.barra(x, 0, 0); // Handles values outside 0-100 as per canvasLocal.js
+        }
+        i++;
     }
-    this.graphics.strokeStyle = 'black';
-    let ind = 0;
-    for (let i = 0.5; i <=8; i += 2){
-      //this.graphics.strokeStyle = colors[ind];
-      this.graphics.fillStyle = colors[ind];
-      //console.log(this.rHeight*h[ind]/maxEsc)
-      this.drawLine(this.iX(i), this.iY(6 * h[ind] / maxEsc-0.1), this.iX(i), this.iY(0));
-      this.graphics.fillRect(this.iX(i), this.iY(6 * h[ind] / maxEsc-0.1), this.iX(2) - this.iX(1), this.iY(0.2) - this.iY(6 * h[ind] / maxEsc ));
-      this.drawRmboide(this.iX(i + 0.3), this.iY(6 * h[ind] / maxEsc + 0.2), this.iX(i + 1.3), this.iY(6 * h[ind] / maxEsc + 0.2),
-                      this.iX(i + 1), this.iY(6 * h[ind] / maxEsc-0.1), this.iX(i), this.iY(6 * h[ind] / maxEsc-0.1), colors[ind]);
-      this.drawRmboide(this.iX(i + 1), this.iY(6 * h[ind] / maxEsc-0.1), this.iX(i + 1.3), this.iY(6 * h[ind] / maxEsc + 0.2),
-                      this.iX(i+1.3), this.iY(0.4), this.iX(i+1), this.iY(0.1), colors[ind]) ;
-      ind++;
-    }
-    ind=0
-    for (let x = 0; x < 8; x += 2) {
-      this.graphics.strokeText(colors[ind++], this.iX(x+0.5), this.iY(-0.5));
-    }
-
-    for (let y = 0; y< h.length; y++) {
-      this.graphics.strokeText(colors[y], this.iX(9), this.iY(5 - y));
-      this.graphics.fillStyle = colors[y];
-      this.graphics.fillRect(this.iX(8.5), this.iY(5 - y), 10, 10);
-    }*/
-    
   }
-
 }
